@@ -1,4 +1,4 @@
-# CSM-Fa19-Worksheets
+# CSM EECS 16A Fall 2019 Worksheets
 
 Primary Repo of CSM (Computer Science Mentors) EECS 16A (Designing Information and Devices I) Fall 2019 Worksheet source files. 
 
