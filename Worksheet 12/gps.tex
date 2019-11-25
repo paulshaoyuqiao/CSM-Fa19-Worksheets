@@ -6,12 +6,14 @@ Understanding how trilateration works and how it is derived, working with norms 
 }
 \\ \\
 Suppose that you are the engineer tasked with the job of making Google Maps. For this, you want to be able to determine the position of a user using satellite information. In particular, assume that you know $d_1, d_2$ and $d_3$, the distances from the user's cellphone to 3 satellites. You know the positions of these satellites to be $\vec{a_1}, \vec{a_2}$, and $\vec{a_3}$. Here's a simplified figure demonstrating what's been given so far:
+
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{../trilateration.png}
 \end{figure}
 
-\textit{Note: What does it mean when we say "position"? You can assume that these positions are taken relative to some common origin. Say, the Google HQ - Mountain View, CA. }
+\textit{Note: What does it mean when we say "position"? You can assume that these positions are taken relative to some common origin. Say, the Google HQ - Mountain View, CA.}
+
 \begin{enumerate}
 \item{Suppose the user's location (or the phone's location) is given by the vector $\vec{x}$, write out a system of equations representing the distances from the user to all 3 satellites (Express your answer in terms of $\vec{x}, \vec{a_1}, \vec{a_2}, \vec{a_3}, d_1, d_2, $ and $d_3$).}
 
