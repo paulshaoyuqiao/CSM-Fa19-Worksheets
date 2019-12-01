@@ -6,8 +6,8 @@ In this question, we will revisit the \textbf{Acoustic Positioning System} (APS)
 \\ \\
 Recall that in an APS, we have a number of satellites (let's say there are $m$) transmitting gold codes, and you are a person standing at a location with the coordinate $\vec{x}$, with your phone as the receiver of the signals.
 \\ \\
-You receive a linear combination of these transmitted signals:
-$$\vec{r} = \alpha_1 \vec{s}_1^{(\tau_1)} + \alpha_2 \vec{s}_2^{(\tau_2)} + \hdots + \alpha_m \vec{s}_m^{(\tau_m)}$$
+You receive a linear combination of these transmitted signals, each delayed by $(\tau_i)$:
+$$\vec{r} = \alpha_1 \vec{s}_1^{\ (\tau_1)} + \alpha_2 \vec{s}_2^{\ (\tau_2)} + \hdots + \alpha_m \vec{s}_m^{\ (\tau_m)}$$
 As shown in the expression above, each signal is scaled by a constant which is a \textit{"message"} the satellite encodes into its signal while transmitting.
 \\ \\
 To solve for our current position, we can set up a system of equations based on our current position $\vec{x}$, the position of each satellite $\vec{p}_1, \vec{p}_2, \hdots, \vec{p}_m$, and the distance from our current position to each satellite $d_i$.
@@ -24,14 +24,53 @@ Here's an illustration of the APS (given 3 satellites):
         \begin{itemize}
             \item The position of each satellite $\vec{p}_i$
             \item Our current position $\vec{x}$
-            \item The transmitted signals $\vec{s}_i^{(\tau_i)}$
+            \item The transmitted signals $\vec{s}_i^{\ (\tau_i)}$
             \item The distances from our current position to each satellite $d_i$
+            \item The time delay of each signal $\tau_1, \ldots, \tau_m$
+            \item The messages $\alpha_1, \ldots, \alpha_m$
         \end{itemize}
     \answerbox{2cm}
+
+    \sol {
+      \begin{itemize}
+            \item The position of each satellite $\vec{p}_i:$
+            These are \textbf{known} variables since we as the engineer have placed these satellites out in space.
+            \item Our current position $\vec{x}:$
+            This is an $\textbf{unknown}$ variable that we are trying to determine using the satellites and received signal.
+            \item The transmitted signals $\vec{s}_i^{\ (\tau_i)}:$
+            These are \textbf{known} variables that we as the engineer have programmed, hopefully using Gold Codes.
+            \item The distances from our current position to each satellite $d_i:$
+            These an $\textbf{unknown}$ variables since we don't know our current position $\vec{x}.$
+            \item The time delay of each signal $\tau_1, \ldots, \tau_m.$
+            These are \textbf{unknown} variables as well, since we don't know the distance from our current position to the satellites. Note that $d_i$ and $\tau_i$ are related by the physics equation $d = v \cdot t$ where $v$ is the speed of light and $t$ is the time delay in seconds.
+            \item The messages $\alpha_1, \ldots, \alpha_m:$ 
+            These are \textbf{unknown} variables that we need to solve for since we receive one signal $\vec{r}$ that is a linear combination of the satellite signals and $\alpha_i$ are the weights of this linear combination.
+      \end{itemize}
+    }
+
+    \item We will start by solving for the distances $d_{i}$ and the time delays $\tau_{i}.$ How can we compute these quantities using the received signal $\vec{r}$ and the Gold-Codes for each satellite, $\vec{s}_{i}?$
+
+    \note {
+        Note that $\tau_{i}$ is an integer which represents the time shift for the discrete signal $\vec{s}_{i}.$
+        Therefore to compute the distance $d_{i}$ in meters, the time delay $\tau_{i}$ must be converted into seconds.
+        This is out of scope, but can be done based on the sampling rate of the receiver, and should only be addressed if students ask about it.
+    }
+
+    \sol {
+        We can solve for the time delay $\tau_{i}$ by computing the cross-correlation between $\vec{r}$ and $\vec{s}_{i}.$
+        \[ \text{corr}_{\vec{r}}(\vec{s}_{i})[k] = \sum\limits_{n = -\infty}^{\infty} \vec{r}[n] \vec{s}_{i}[n - k] \]
+        Remember that the cross-correlation between two vectors $\vec{r}, \vec{s}_{i}$ measures the similarity between $\vec{r}$ with all shifts of $\vec{s}_{i}.$
+        Therefore, we pick the index $\tau_{i}$ as the index of greatest cross-correlation between $\vec{r}$ and $\vec{s}_{i}.$
+        The distance $d_{i}$ can be computed by multiplying the time delay by the 
+    }
 
     \item How can we express $d_i$ in terms of $\vec{p}_i$ and $\vec{x}$? How many such equations can we set up in total?
 
     \answerbox{5cm}
+
+    \sol {
+
+    }
 
 
     \item Recall that an APS can help us determine where we are. Which variable given in the question corresponds to our current location?
@@ -55,7 +94,7 @@ Here's an illustration of the APS (given 3 satellites):
     \answerbox{4cm}
 
     \item Now that we have figured out where we are, it is time for us to decode the message! Recall that what our phone receives is a linear combination of these transmitted signals:
-    $$\vec{r} = \alpha_1 \vec{s}_1^{(\tau_1)} + \alpha_2 \vec{s}_2^{(\tau_2)} + \hdots + \alpha_m \vec{s}_m^{(\tau_m)}$$
+    $$\vec{r} = \alpha_1 \vec{s}_1^{\ (\tau_1)} + \alpha_2 \vec{s}_2^{\ (\tau_2)} + \hdots + \alpha_m \vec{s}_m^{\ (\tau_m)}$$
     From the expression above, which of the following variables are we trying to solve for?
     \begin{itemize}
         \item The scaling (attenuating) constant $\alpha_i$
