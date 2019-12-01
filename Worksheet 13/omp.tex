@@ -1,0 +1,125 @@
+% Author: Rishi Veerapeneni, Jonathan Shi
+\\ \\
+\learning{
+    Understand the motivation for OMP and how the algorithm works.
+}
+\\ \\
+\note{
+    Emphasize the assumptions we make, why we make them, and how we make use of them in the OMP algorithm.
+}
+\begin{enumerate}
+    \item What is the problem that OMP is trying to solve? (Hint: Don't look at the next prompt)
+    \sol{
+        See the description of the next subpart.
+    }
+    \answerbox{1cm}
+    OMP is trying to solve an equation of the form $A\vec{x} = \vec{b}$.
+    This make look familiar, as we have discussed other ways of solving this equation,
+    like Gaussian elimination, inverse matrices, or least squares.
+    In this question, we will explore when and why we would want to use OMP instead of
+    these other techniques.
+    \\ \\
+    \note {
+        This first half of the problem focuses on the motivation of and assumptions made in the OMP algorithm.
+    }
+
+    \item In the equation $A\vec{x} = \vec{b}$, what are $A$, $\vec{x}$, and $\vec{b}$?
+    Specifically, what are their dimensions, and what do they mean in the context of
+    a real-world problem like GPS trilateration? 
+    \begin{itemize}
+        \item What does $A$ represent? What are its dimensions? What do $A_i$ and $A_{i,j}$ represent?
+        \answerbox{0.5cm}
+        \\ \\
+        \sol{
+            $A$ is an $n\times m$ matrix, where $m$ is the number of devices and $n$ is the signal
+            broadcasted by each device. Therefore, $A_i$ is the signal from the $i$th device, and
+            $A_{i,j}$ is the $j$th element of the signal.
+        }
+
+        \item What does $\vec{x}$ represent? What are its dimensions? What does $x_i$ represent?
+        \answerbox{0.5cm}
+        \\ \\
+        \sol{
+            $\vec{x}$ is an $m\times 1$ matrix, so we just say it is a vector of size $m$.
+            $x_i$ represents the scaling factor (and the strength) of the signal sent out by the $i$th device.
+        }
+
+        \item What does $\vec{b}$ represent? What are its dimensions?
+        \answerbox{0.5cm}
+        \\ \\
+        \sol{
+            $\vec{b}$ is an $n\times 1$ matrix, so we just say it is a vector of size $n$.
+            $\vec{b}$ represents the signal the signal received by the receiver.
+        }
+    \end{itemize}
+
+    \item To solve $A\vec{x}=\vec{b}$, what assumptions do we need to make in order to use each of the following techniques?
+    \\ \\
+    \note{
+        Try to explain how each of these assumptions would be violated in the context of the GPS problem.
+    }
+    \begin{itemize}
+        \item Gaussian elimination
+        \answerbox{1cm}
+        \\ \\
+        \sol{There must be no noise in our received signal $\vec{b}$.}
+        \item Inverse matrices
+        \answerbox{1cm}
+        \\ \\
+        \sol{
+            $A$ must be square and its columns must be linearly independent.
+            Note that GE can be used even when $A$ is not square.
+        }
+        \item Least squares
+        \answerbox{1cm}
+        \\ \\
+        \sol{
+            $A^TA$ must be invertible, which in turn means $A$ must have a non-trivial nullspace
+            (see \href{http://inst.eecs.berkeley.edu/~ee16a/fa19/lecture/Note23.pdf}{Note 23} for more details.)
+            This also means $A$ must have linearly independent columns.
+        }
+    \end{itemize}
+
+    \item What specific assumptions does the OMP algorithm make? \textit{
+        Hint: there's three main ones.
+    }
+    \answerbox{2cm}
+    \\ \\
+    \sol{
+        \begin{itemize}
+            \item There are many devices that could be broadcasting signals
+            \item The signals sent by each device are nearly orthogonal to each other
+            \item Only a few devices are actually sending out signals, i.e.
+                  there are few $i$ for which $x_i$ would be nonzero.
+        \end{itemize}
+    }
+    \item What do these assumptions imply about
+    \begin{itemize}
+        \item the dimensions of $A$, the matrix whose columns are all our possible beacons?
+        \answerbox{0.5cm}
+        \item the relationship between $a_i$ and $a_j$, two of our possible beacon signals?
+        \answerbox{0.5cm}
+        \item the scaling factors in $\vec{x}$?
+        \answerbox{0.5cm}
+    \end{itemize}
+    \sol{
+        \begin{itemize}
+            \item $A$ should be short and wide, as we have many possible signals
+            \item $<\vec{a_i}, \vec{a_j}> \approx 0$, as our signals are nearly orthogonal
+            \item most $x_i$ are 0, as $\vec{x}$ is sparse
+        \end{itemize}
+        Note that $A$ here is the $A$ in our original equation $A\vec{x}=\vec{b}$,
+        not the same as the $A$ constructed by the OMP algorithm. The $A$ constructed by OMP
+        simply omits all beacons that we believe to not be broadcasting, i.e. $\vec{a_i}$ for which $x_i$ is 0.
+    }
+
+    We now know what assumptions are necessary to apply OMP. Now let's talk about the algorithm!
+    OMP as a whole revolves around a simple strategy. We keep track of how much of the received signal is
+    still unaccounted for, find the strongest device within that signal, subtract out that component from
+    the unaccounted for signal, and repeat until we can't find more beacon signals.
+    \\ \\
+    \note{
+        We now focus on the steps of the algorithm itself.
+    }
+
+\end{enumerate}

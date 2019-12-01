@@ -1,11 +1,11 @@
-PWD /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions
+PWD /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas
 INPUT /usr/local/texlive/2017/texmf.cnf
 INPUT /usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.tex
-OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.log
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/../macros.tex
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/../macros.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.tex
+OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.log
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../macros.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../macros.tex
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/size10.clo
@@ -272,9 +272,9 @@ INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/translator-
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/translator-language-mappings.tex
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.aux
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.aux
-OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.aux
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.aux
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.aux
+OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.aux
 INPUT /usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
@@ -283,22 +283,22 @@ INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.bcf
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.bbl
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.bbl
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.bbl
+OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.bcf
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.bbl
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.bbl
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.bbl
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 INPUT /usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 INPUT /usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.pdf
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.pdf
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/dicts/translator-basic-dictionary/translator-basic-dictionary-English.dict
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/beamer/translator/dicts/translator-basic-dictionary/translator-basic-dictionary-English.dict
 INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
@@ -327,14 +327,42 @@ INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx9.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../ls.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../ls.tex
 INPUT /usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.aux
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.out
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.run.xml
-OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/solutions/solutions.run.xml
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../omp.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../omp.tex
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbxsl10.tfm
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../gps.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../gps.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../trilateration-1.png
+INPUT ../trilateration-1.png
+INPUT ../trilateration-1.png
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../trilateration-2.png
+INPUT ../trilateration-2.png
+INPUT ../trilateration-2.png
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.aux
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.out
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.run.xml
+OUTPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/meta.run.xml
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxsl10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
