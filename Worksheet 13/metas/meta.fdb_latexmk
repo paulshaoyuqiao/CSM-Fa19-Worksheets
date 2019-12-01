@@ -1,13 +1,13 @@
 # Fdb version 3
-["biber meta"] 1575188548 "meta.bcf" "meta.bbl" "meta" 1575188681
-  "meta.bcf" 1575188681 90028 cbd81645b3fad370fbf0b8e4b1821886 ""
+["biber meta"] 1575188548 "meta.bcf" "meta.bbl" "meta" 1575225425
+  "meta.bcf" 1575225425 90028 cbd81645b3fad370fbf0b8e4b1821886 ""
   (generated)
-  "meta.blg"
   "meta.bbl"
-["pdflatex"] 1575188680 "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.tex" "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.pdf" "meta" 1575188681
-  "../ls.tex" 1575188680 2819 b9720844a66b3975b18008a71652f5bc ""
+  "meta.blg"
+["pdflatex"] 1575225424 "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.tex" "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.pdf" "meta" 1575225425
+  "../ls.tex" 1575225424 2822 5da5a066bdfcbee83b907d3456359a2d ""
   "../macros.tex" 1575181879 2320 6d40c3b8b3d6093837ef00175874ff62 ""
-  "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.aux" 1575188681 1075 76999b0aa391a39dfd87a6e3433c1763 ""
+  "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.aux" 1575225425 1075 76999b0aa391a39dfd87a6e3433c1763 ""
   "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.tex" 1575184306 270 59995517c56cf9089581aad7a035496b ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
@@ -179,17 +179,17 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1523934516 4220280 10cab8fbd7c5a7c52aba9917e190d018 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "meta.aux" 1575188681 1075 76999b0aa391a39dfd87a6e3433c1763 ""
+  "meta.aux" 1575225425 1075 76999b0aa391a39dfd87a6e3433c1763 ""
   "meta.bbl" 1575188549 0 d41d8cd98f00b204e9800998ecf8427e "biber meta"
-  "meta.out" 1575188681 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "meta.run.xml" 1575188681 2224 f326b4deb849380a5c19bd282fe77197 ""
+  "meta.out" 1575225425 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "meta.run.xml" 1575225425 2224 f326b4deb849380a5c19bd282fe77197 ""
   "meta.tex" 1575184306 270 59995517c56cf9089581aad7a035496b ""
   (generated)
   "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.log"
-  "meta.aux"
+  "meta.out"
   "meta.bcf"
   "meta.pdf"
-  "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.pdf"
-  "meta.out"
-  "meta.log"
   "meta.run.xml"
+  "meta.aux"
+  "/Users/kshu/Desktop/CSM-Fa19-Worksheets/Worksheet 13/metas/meta.pdf"
+  "meta.log"
