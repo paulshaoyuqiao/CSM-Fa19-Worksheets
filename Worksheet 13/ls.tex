@@ -6,24 +6,22 @@
 \\ \\
 \begin{enumerate}
     \item{Write Ohm's Law for a resistor.}
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz}
+            \draw
+            (0,0) to[R,l=$R$,v=$V_R$, i=$I_R$] ++(2,0);
+        \end{circuitikz}
+    \end{figure}
 
     \answerbox{1.5cm}
 
     \sol{
-        For the resistor
-            \begin{figure}[H]
-                \centering
-                \begin{circuitikz}
-                    \draw
-                    (0,0) to[R,l=$R$,v=$V_R$, i=$I_R$] ++(2,0);
-                \end{circuitikz}
-            \end{figure}
+        For a resistor, we have:
         $$V_R = I_RR$$
     }
 
     \item{You're given the following test setup and told to find $R_{Th}$ between the two terminals of the mystery box. What is $R_{Th}$ of the mystery box between the two terminals in terms of $V_S$ and $I_\text{measure}$?}
-
-    \answerbox{3cm}
 
     \begin{figure}[H]
         \centering
@@ -38,6 +36,10 @@
             \node[draw,minimum width=2cm,minimum height=2.4cm,anchor=south west] at (4.5,-0.2){Mystery Box};
         \end{circuitikz}
     \end{figure}
+
+    \answerbox{3cm}
+
+
 
     \sol{
         \begin{align*}

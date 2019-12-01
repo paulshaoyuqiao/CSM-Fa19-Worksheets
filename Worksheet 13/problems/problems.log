@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.4.16)  1 DEC 2019 13:57
+This is LuaTeX, Version 1.07.0 (TeX Live 2018)  (format=lualatex 2018.4.16)  1 DEC 2019 14:00
  restricted system commands enabled.
  file:line:error style messages enabled.
 **"/Users/paulshao/Desktop/CSM-Fa19-Worksheets/Worksheet 13/problems/problems"
@@ -23,7 +23,7 @@ Inserting `luaotfload.aux.patch_cambria_domh' at position 2 in `luaotfload.patch
 Inserting `luaotfload.aux.fixup_fontdata' at position 1 in `luaotfload.patch_font_unsafe'.
 Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'.
-luaotfload | main : initialization completed in 0.094 seconds
+luaotfload | main : initialization completed in 0.093 seconds
 Babel <3.18> and hyphenation patterns for 1 language(s) loaded.
 (../macros.tex (/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -930,25 +930,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 6--7
 
  []
 
-
-Overfull \hbox (2.22pt too wide) in paragraph at lines 10--10
-[]   
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 10.
+LaTeX Font Info:    Try loading font information for U+msa on input line 13.
 (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 10.
+LaTeX Font Info:    Try loading font information for U+msb on input line 13.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)(load luc: /Users/paulshao/Library/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-regular.luc)(load luc: /Users/paulshao/Library/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman5-regular.luc)
-Overfull \hbox (2.22pt too wide) in paragraph at lines 26--26
+)
+Overfull \hbox (2.22pt too wide) in paragraph at lines 17--17
+[]   
+ []
+
+(load luc: /Users/paulshao/Library/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman7-regular.luc)(load luc: /Users/paulshao/Library/texlive/2018/texmf-var/luatex-cache/generic/fonts/otl/lmroman5-regular.luc)
+Overfull \hbox (2.22pt too wide) in paragraph at lines 40--40
 []   
  []
 
 
-Overfull \hbox (2.22pt too wide) in paragraph at lines 68--68
+Overfull \hbox (2.22pt too wide) in paragraph at lines 70--70
 []   
  []
 
@@ -974,7 +974,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-<../trilateration-1.png, id=31, 406.51875pt x 430.60875pt>
+<../trilateration-1.png, id=32, 406.51875pt x 430.60875pt>
 File: ../trilateration-1.png Graphic file (type png)
 <use ../trilateration-1.png>
 Package luatex.def Info: ../trilateration-1.png  used on input line 18.
@@ -1014,7 +1014,7 @@ Overfull \hbox (2.22pt too wide) in paragraph at lines 47--47
 []   
  []
 
-<../trilateration-2.png, id=42, 659.46375pt x 672.5125pt>
+<../trilateration-2.png, id=43, 659.46375pt x 672.5125pt>
 File: ../trilateration-2.png Graphic file (type png)
 <use ../trilateration-2.png>
 Package luatex.def Info: ../trilateration-2.png  used on input line 52.
@@ -1068,19 +1068,19 @@ Package logreq Info: Writing requests to 'problems.run.xml'.
 )
 
 Here is how much of LuaTeX's memory you used:
- 32726 strings out of 494413
+ 32892 strings out of 494413
  125171,1373583 words of node,token memory allocated
- 499 words of node memory still in use:
-   5 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 8 attribute, 60 glue_spec, 8 attribute_list, 1 write nodes
-   avail lists: 1:1,2:1485,3:346,4:20,5:167,6:16,7:1916,8:60,9:228,10:6,11:131
- 35861 multiletter control sequences out of 65536+600000
+ 503 words of node memory still in use:
+   5 hlist, 2 vlist, 2 rule, 2 glue, 1 kern, 9 attribute, 60 glue_spec, 9 attribute_list, 1 write nodes
+   avail lists: 1:2,2:2071,3:499,4:21,5:168,6:16,7:1983,8:63,9:283,10:6,11:131
+ 36026 multiletter control sequences out of 65536+600000
  42 fonts using 3024735 bytes
- 57i,10n,55p,968b,922s stack positions out of 5000i,500n,10000p,200000b,100000s
+ 57i,10n,55p,968b,935s stack positions out of 5000i,500n,10000p,200000b,100000s
 </usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmromanslant10-bold.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmromanslant10-regular.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmroman9-bold.otf></usr/local/texlive/2018/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on problems.pdf (6 pages, 634237 bytes).
+Output written on problems.pdf (6 pages, 635200 bytes).
 
-PDF statistics: 142 PDF objects out of 1000 (max. 8388607)
- 98 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 131072)
+PDF statistics: 143 PDF objects out of 1000 (max. 8388607)
+ 99 compressed objects within 1 object stream
+ 26 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
