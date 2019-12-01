@@ -6,32 +6,38 @@
 \\ \\
 \begin{enumerate}
     \item{Write Ohm's Law for a resistor.}
-    
+
+    \answerbox{1.5cm}
+
     \sol{
         For the resistor
-        \begin{center}
-            % not sure why circuitikz is giving an error
-            %\begin{circuitikz}
-                %\draw
-                %(0,0) to[R,l=$R$,v=$V_R$, i=$I_R$] ++(2,0);
-            %\end{circuitikz}
-        \end{center}
+            \begin{figure}[H]
+                \centering
+                \begin{circuitikz}
+                    \draw
+                    (0,0) to[R,l=$R$,v=$V_R$, i=$I_R$] ++(2,0);
+                \end{circuitikz}
+            \end{figure}
         $$V_R = I_RR$$
     }
 
     \item{You're given the following test setup and told to find $R_{Th}$ between the two terminals of the mystery box. What is $R_{Th}$ of the mystery box between the two terminals in terms of $V_S$ and $I_\text{measure}$?}
-    
-    % not sure why circuitikz is giving an error
-    %\begin{circuitikz} [baseline=(current bounding box.center)]
-        %\ctikzset { label/align = straight }
-        %\draw (0,0)
-            %to[V=$V_{S}$,invert] (0,2)
-            %to[short, i=$I_\text{measure}$, -o] (4,2)
-            %to[short] (4.5,2)
-            %(0,0) to[short,-o] (4,0)
-            %to[short] (4.5,0);
-        %\node[draw,minimum width=2cm,minimum height=2.4cm,anchor=south west] at (4.5,-0.2){Mystery Box};
-    %\end{circuitikz}
+
+    \answerbox{3cm}
+
+    \begin{figure}[H]
+        \centering
+        \begin{circuitikz} [baseline=(current bounding box.center)]
+            \ctikzset { label/align = straight }
+            \draw (0,0)
+                to[V=$V_{S}$,invert] (0,2)
+                to[short, i=$I_\text{measure}$, -o] (4,2)
+                to[short] (4.5,2)
+                (0,0) to[short,-o] (4,0)
+                to[short] (4.5,0);
+            \node[draw,minimum width=2cm,minimum height=2.4cm,anchor=south west] at (4.5,-0.2){Mystery Box};
+        \end{circuitikz}
+    \end{figure}
 
     \sol{
         \begin{align*}
@@ -58,6 +64,8 @@
     \note{
         Since voltage and current are directly proportional, as seen in Ohm's Law, there is no additional input. Therefore, the corresponding matrix $A$ is a 4 x 1 vector.
     }
+
+    \answerbox{6cm}
 
     \sol{
         According to Ohm's Law, $V = IR$. We are estimating the resistance so $R_{Th}$ corresponds to $\vec{x}$ in the $A\vec{x}=\vec{b}$ Least Squares equation.

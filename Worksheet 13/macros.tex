@@ -13,6 +13,7 @@
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{rotating}
 \usepackage{booktabs}
+\usepackage{circuitikz}
 
 \hypersetup{%
 pdfauthor={Paul Shao},%
@@ -73,3 +74,11 @@ pdfproducer={PDFLaTeX},%
 \newcommand{\sol}[1]{{\color{blue} \textbf{Solution: } #1}} % solutions in blue
 \newcommand{\learning}[1]{{\color{ForestGreen} \textbf{Learning Goal: } #1}}
 \newcommand{\note}[1]{{\color{purple} \textbf{Meta: } #1}} % notes in green
+\newcommand{\answerbox}[1]{
+   \noindent\fbox{
+      \parbox{16cm}{
+          \hspace{16cm}
+          \vspace{#1}
+      }
+  }
+} % wrapper for answer boxes 
