@@ -177,6 +177,50 @@ these other techniques.
         }
     \end{enumerate}
     Let's walk through the algorithm with some example values now.
-    % TODO
-
+    % The below numbers are taken from the old CSM question bank (https://github.com/csmberkeley/csm-16a/blob/master/questionBank/week13/q_omp.tex)
+    \\ \\
+    Suppose we have 100 different beacons, each broadcasting a message $\vec{a}_i$.
+    Let our maximum number of signals $k=2$.
+    Suppose we receive the signal $\vec{b} = x_{40}\vec{a_{40}}^{13} + x_{100}\vec{a_{100}}^{8}$, where $x_{40} = 100$ and $x_{100} = 10$
+    \item At the start of our algorithm, how much of the received signal is still unaccounted for?
+    \item Our next step is to find the strongest unaccounted for beacon within $\vec{e}$.
+    How would we do this, and which vector would this give us?
+    \\ \\
+    \sol{
+        If we were to cross-correlate $\vec{b}$ with each $\vec{a}_i$, we would find that
+        $\vec{a_{40}}$ with a shift of 13 would have the highest correlation.
+    }
+    \\ \\
+    \note{
+        It may help to draw out what the shape of the correlation matrix looks like and what each
+        term means, as it may be somewhat tedious to do this with actual numbers.
+    }
+    \item How do we estimate our new value of $\vec{x}_{curr}$? Approximately what would it be?
+    \\ \\
+    \sol{
+        We would perform least squares with $A = \begin{bmatrix} \vline \\ \vec{a_{40}} \\ \vline \end{bmatrix}$ to give us
+        $\vec{x}_{curr} \approx \begin{bmatrix} 100 \end{bmatrix}$.
+        The value won't exactly be 100, because there may be some noise in our received $\vec{b}$
+        and since the $\vec{a_i}$ aren't exactly orthogonal, some of the scaling of another signal
+        might be erroneously accounted for here.
+    }
+    \item After the last step, how much of $\vec{b}$ remains unaccounted for?
+    \\ \\
+    \sol{
+        $\vec{e} = \vec{b} - A\vec{x}_{curr}$
+    }
+    \item How would we find the next strongest unaccounted for beacon, and which vector would we get?
+    \\ \\
+    \sol{
+        We cross-correlate as before, and we would find $\vec{a_{100}}$ with a shift of 8 to give the
+        highest correlation.
+    }
+    \item How do we estimate our new value of $\vec{x}_{curr}$? Approximately what would it be?
+    \\ \\
+    \sol{
+        We do least squares with $A = \begin{bmatrix} \vline & \vline \\ \vec{a_{40}} & \vec{a_{100}} \\ \vline & \vline \end{bmatrix}$.
+        This would yield $\vec{x}_{curr} \approx \begin{bmatrix} 100 \\ 10 \end{bmatrix}$.
+    }
+    \\ \\
+    We can now terminate OMP, as we have performed 2 iterations of the algorithm, thereby finding $k=2$ signals.
 \end{enumerate}
