@@ -98,16 +98,16 @@ Here's an illustration of the APS (given 3 satellites):
         \end{align*}
         We can then do this for any satellite $i$ to say that
         \begin{align*}
-            \norm{\vec{x} - \vec{p}_{1}}^{2} &= \vec{x}^{T} \vec{x} - 2 \vec{p}_{1}^{T} \vec{x} + d_{1}^{2} \\
+            \norm{\vec{x} - \vec{p}_{1}}^{2} &= \vec{x}^{T} \vec{x} - 2 \vec{p}_{1}^{T} \vec{x} + \vec{p}_{1}^{T} \vec{p}_{1} = d_{1}^{2} \\
             &\vdots \\
-            \norm{\vec{x} - \vec{p}_{m}} &= \vec{x}^{T} \vec{x} - 2 \vec{p}_{m}^{T} \vec{x} + d_{m}^{2} 
+            \norm{\vec{x} - \vec{p}_{m}}^{2} &= \vec{x}^{T} \vec{x} - 2 \vec{p}_{m}^{T} \vec{x} + \vec{p}_{m}^{T} \vec{p}_{m} = d_{m}^{2} 
         \end{align*}
         While we have a system of equations that we could try solving, the issue is the quadratic term $\vec{x}^{T} \vec{x}.$ 
         Therefore, we will get rid of this quadratic term by subtracting every equation from the first equation to get
         \begin{align*}
-            2 \vec{p}_{1}^{T} \vec{x} - 2 \vec{p}_{2}^{T} \vec{x} &= d_{2}^{2} - d_{1}^{2} \\
+            2 \vec{p}_{1}^{T} \vec{x} - 2 \vec{p}_{2}^{T} \vec{x} &= d_{2}^{2} - d_{1}^{2} + \vec{p}_{2}^{T} \vec{p}_{2} - \vec{p}_{1}^{T} \vec{p}_{1} \\
             &\vdots \\
-            2 \vec{p}_{1}^{T} \vec{x} - 2 \vec{p}_{m}^{T} \vec{x} &= d_{m}^{2} - d_{1}^{2}
+            2 \vec{p}_{1}^{T} \vec{x} - 2 \vec{p}_{m}^{T} \vec{x} &= d_{m}^{2} - d_{1}^{2} + \vec{p}_{m}^{T} \vec{p}_{m} - \vec{p}_{1}^{T} \vec{p}_{1}
         \end{align*}
         We can now set up the following matrix-vector equation:
         \[
@@ -117,9 +117,9 @@ Here's an illustration of the APS (given 3 satellites):
             2 (\vec{p}_{1}^{T} \vec{x} - \vec{p}_{m}^{T})
             \end{bmatrix} \vec{x} = 
             \begin{bmatrix} 
-            d_{2}^{2} - d_{1}^{2} \\
+            d_{2}^{2} - d_{1}^{2} + \vec{p}_{2}^{T} \vec{p}_{2} - \vec{p}_{1}^{T} \vec{p}_{1}\\
             \vdots \\
-            d_{m}^{2} - d_{1}^{2}
+            d_{m}^{2} - d_{1}^{2} + \vec{p}_{m}^{T} \vec{p}_{m} - \vec{p}_{1}^{T} \vec{p}_{1}
             \end{bmatrix}
         \]
         $\vec{x}$ can be solved either through Gaussian-Elimination, Inversion, or Least Squares depending on the shape of the matrix.
@@ -197,7 +197,7 @@ Here's an illustration of the APS (given 3 satellites):
     \answerbox{3cm}
 
     \sol {
-        The least-squares solution will be $\vec{\widetilde{v}} = (A^{T}A)^{-1} A^{T} \vec{b}.$
+        The least-squares solution will be $\vec{\hat{v}} = (A^{T}A)^{-1} A^{T} \vec{b}.$
     }
 
     \item Does there exist a case where least squares would not work? Write down a sufficient condition where we have to resort to some other techniques to recover the original message.
@@ -209,7 +209,7 @@ Here's an illustration of the APS (given 3 satellites):
 
     \sol {
         Least-Squares will fail when $A^{T}A$ is not an invertible matrix. 
-        It can in fact be shown that $\text{Nul}(A) = \text{Nul}(A^{T} A)$ meaning the two subspaces will have the same dimensions.
+        It can in fact be shown that $\text{Nul} \ A = \text{Nul} \ A^{T} A$ meaning the two subspaces will have the same dimensions. \\
         If $A$ is a $p \times m$ matrix, then $A^{T}A$ is a $m \times m$ matrix. 
         By the Rank-Nullity Theorem, $\text{dim Col} \ A^{T}A + \text{dim Nul} \ A^{T}A = m$ so we want $\text{dim Nul} \ A^{T} A$ to be zero for $A^{T}A$ to be invertible. Therefore, since $\text{dim Col} \ A + \text{dim Nul} \ A = p,$ and $\text{Nul} A = \text{Nul} \ A^{T} A,$ it must be that $\text{dim Col} \ A = p.$
         We conclude by saying that the matrix $A$ must be full-rank in order for Least-Squares to have a unique solution.
@@ -240,8 +240,8 @@ Here's an illustration of the APS (given 3 satellites):
 
     \sol {
         In each step of OMP, we try to explain the data using our selected satellites $\vec{s}_{i}$ with the message $\alpha_{i}.$ 
-        We then create an estimate $\vec{\widetilde{r}} = \sum\limits_{l = 1}^{k} \alpha_{l} \vec{s}_{l}^{\ (\tau_{l})}$ using the information we have. 
-        The stopping condition of OMP will be when the residual $\vec{e} = \vec{r} - \vec{\widetilde{r}}$ is smaller than some threshold for us to say that we have explained the received signal $\vec{r}$ to the best of our ability.
+        We then create an estimate $\vec{\hat{r}} = \sum\limits_{l = 1}^{k} \alpha_{l} \vec{s}_{l}^{\ (\tau_{l})}$ using the information we have. 
+        The stopping condition of OMP will be when the residual $\vec{e} = \vec{r} - \vec{\hat{r}}$ is smaller than some threshold for us to say that we have explained the received signal $\vec{r}$ to the best of our ability.
     }
 
     \answerbox{2cm}
