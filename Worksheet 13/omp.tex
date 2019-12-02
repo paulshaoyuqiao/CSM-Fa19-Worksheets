@@ -5,7 +5,7 @@
 }
 
 OMP is an algorithm that solves an equation of the form $A\vec{x} = \vec{b}$.
-This make look familiar, as we have discussed other ways of solving this equation,
+This may look familiar, as we have discussed other ways of solving this equation,
 like Gaussian elimination, inverse matrices, or least squares.
 In this question, we will explore when and why we would want to use OMP instead of
 these other techniques.
@@ -89,7 +89,7 @@ these other techniques.
     \begin{itemize}
         \item the dimensions of $A$, the matrix whose columns are all our possible beacons?
         \answerbox{0.5cm}
-        \item the relationship between $a_i$ and $a_j$, two of our possible beacon signals?
+        \item the relationship between $\vec{s}_i$ and $\vec{s}_j$, two of our possible beacon signals?
         \answerbox{0.5cm}
         \item the scaling factors in $\vec{x}$?
         \answerbox{0.5cm}
@@ -97,23 +97,23 @@ these other techniques.
     \sol{
         \begin{itemize}
             \item $A$ should be short and wide, as we have many possible signals
-            \item $<\vec{a_i}, \vec{a_j}> \approx 0$, as our signals are nearly orthogonal
+            \item $<\vec{s}_i, \vec{s}_j> \approx 0$, as our signals are nearly orthogonal
             \item most $x_i$ are 0, as $\vec{x}$ is sparse
         \end{itemize}
         Note that $A$ here is the $A$ in our original equation $A\vec{x}=\vec{b}$,
         not the same as the $A$ constructed by the OMP algorithm. The $A$ constructed by OMP
-        simply omits all beacons that we believe to not be broadcasting, i.e. $\vec{a_i}$ for which $x_i$ is 0.
+        simply omits all beacons that we believe to not be broadcasting, i.e. $\vec{s}_i$ for which $x_i$ is 0.
     }
 
     OMP comes with one more twist: previously, we received a linear combination of our beacons signals, where
-    $$ \vec{b} = x_1\vec{a_1} + \dots + x_m\vec{a_m} $$
-    where $\vec{b}$ is the received signal, and each $\vec{a_i}$ is a beacon signal.
+    $$ \vec{r} = \alpha_1\vec{s}_1 + \dots + \alpha_m\vec{s}_m $$
+    where $\vec{r}$ is the received signal, and each $\vec{s}_i$ is a beacon signal scaled by a factor of $\alpha_i$.
     \\ \\
     In OMP, instead of just receiving a linear combination of beacons, we receive a linear
     combination of \textit{shifted versions} of our beacon signals. In other words,
-    $$ \vec{b} = x_1\vec{a_1}^{(\tau_1)} + \dots + x_m\vec{a_m}^{(\tau_m)} $$
-    where signal $\vec{a_i}^{(\tau_i)}$ denotes $\vec{a_i}$ shifted forward in time by $\tau_i$.
-    \item How does receiving shifted versions of signals affect our assumptions?
+    $$ \vec{r} = \alpha_1\vec{s}_1^{(\tau_1)} + \dots + \alpha_m\vec{s}_m^{(\tau_m)} $$
+    where signal $\vec{s}_i^{(\tau_i)}$ denotes $\vec{s}_i$ shifted forward in time by $\tau_i$.
+    \item How does receiving shifted versions of signals affect our assumptions about their orthogonality?
     \\ \\
     \note{
         It may help to draw on the board what it means to shift the signal \textit{forward} in time,
@@ -123,8 +123,8 @@ these other techniques.
     \\ \\
     \sol{
         Instead of our signals being nearly orthogonal to each other, they must now be nearly orthogonal
-        to all shifts of themselves, i.e.
-        $$ <\vec{a_i}^{(\tau_i)}, \vec{a_j}^{(\tau_j)}> $$
+        to all shifted versions of themselves, i.e.
+        $$ <\vec{s}_i^{(\tau_i)}, \vec{s}_j^{(\tau_j)}> $$
         where $i \neq j$ and $\tau_i \neq \tau_j$.
     }
     \\ \\
@@ -159,13 +159,13 @@ these other techniques.
             Our guess is $A_{curr}\vec{x}_{curr}$, so our error vector is
             $$\vec{e} = \vec{b} - A_{curr}\vec{x}_{curr}$$
         }
-        \item Given $A_{curr}$ and $\vec{x}_{curr}$, how do we find the strongest remaining shifted signal $\vec{a_i}^{(\tau_i)}$?
+        \item Given $A_{curr}$ and $\vec{x}_{curr}$, how do we find the strongest remaining shifted signal $\vec{s}_i^{(\tau_i)}$?
         \textit{Hint: How do we get an expression for how much of the signal is still unaccounted for by the vectors in $A$?}
         \\ \\
         \sol{
             $\vec{e}$, found in the previous problem, actually describes how much of the signal is not yet accounted for.
-            To find the strongest beacon, we now just cross-correlate $\vec{e}$ with each $\vec{a}_i$. The correlation with
-            the largest value tells us which $\vec{a}_i$ it is, and the index within the correlation vector is the
+            To find the strongest beacon, we now just cross-correlate $\vec{e}$ with each $\vec{s}_i$. The correlation with
+            the largest value tells us which $\vec{s}_i$ it is, and the index within the correlation vector is the
             amount this signal was shifted by.
         }
         \item Given guessed signals $A_{curr}$, received signal $\vec{b}$, the signal we just found $\vec{a}$, and old estimate
@@ -177,6 +177,102 @@ these other techniques.
         }
     \end{enumerate}
     Let's walk through the algorithm with some example values now.
-    % TODO
-
+    % The below numbers are a subset of those provided in Note 24
+    % http://inst.eecs.berkeley.edu/~ee16a/fa19/lecture/Note24.pdf
+    Suppose we have the following:
+    \begin{itemize}
+        \item $k=2$ maximum number of signals
+        \item beacon signals $\vec{s}_1 = \begin{bmatrix} -0.5 \\ 0.5 \\ 0.1 \end{bmatrix}$,
+            $\vec{s}_2 = \begin{bmatrix} 0.8 \\ 0.6 \\ 0.7 \end{bmatrix}$,
+            and $\vec{s}_3 = \begin{bmatrix} 0 \\ -0.6 \\ 0 \end{bmatrix}$
+        \item received signal $\vec{r} = \begin{bmatrix} -1.8 \\ 1.5 \\ 0.3\end{bmatrix}$
+    \end{itemize}
+    \item At the start of our algorithm, how much of the received signal is still unaccounted for?
+    \\ \\
+    \sol{
+        Initially, we've found 0 beacon vectors, so the entire received signal $\vec{r}$ is still
+        unaccounted for.
+    }
+    \item Next, find the strongest unaccounted for beacon within $\vec{e}$.
+    \\ \\
+    \sol{
+        Per the previous part, we initialize $\vec{e}=\vec{r}$.
+        We cross-correlate $\vec{e}$ with each $\vec{s}_i$:
+        \begin{itemize}
+            \item $\texttt{circcorr}(\vec{e}, \vec{s}_1) = \begin{bmatrix} 1.68 \\ -0.9 \\ -0.78 \end{bmatrix}$
+            \item $\texttt{circcorr}(\vec{e}, \vec{s}_2) = \begin{bmatrix} -0.33 \\  0.21 \\ 0.12 \end{bmatrix}$
+            \item $\texttt{circcorr}(\vec{e}, \vec{s}_3) = \begin{bmatrix} -0.9 \\ 1.08 \\ -0.18 \end{bmatrix}$
+        \end{itemize}
+        The largest magnitude is in the correlation with $\vec{s}_1$ at index 0.
+        This tells us that we $\vec{s}_1^{(0)}$ is the strongest beacon.
+    }
+    \item Estimate our new value of $\vec{x}_{curr}$.
+    \\ \\
+    \sol{
+        We perform least squares with $A_{curr} = \begin{bmatrix} \vline \\ \vec{s}_1^{(0)} \\ \vline \end{bmatrix}$ to give us
+        $$
+            \vec{x}_{curr} = (\begin{bmatrix} -0.5 & 0.5 & 0.1 \end{bmatrix}
+            \begin{bmatrix} -0.5 \\ 0.5 \\ 0.1 \end{bmatrix})^{-1}
+            \begin{bmatrix} -0.5 & 0.5 & 0.1 \end{bmatrix}
+            \begin{bmatrix} -1.8 \\ 1.5 \\ 0.3 \end{bmatrix}
+            \approx \begin{bmatrix} 3.294 \end{bmatrix}
+        $$
+        We're slightly off the mark (since the actual value is 3), but this is pretty close, and will improve
+        as we improve our estimate.
+    }
+    \item After the last step, how much of $\vec{r}$ remains unaccounted for?
+    \\ \\
+    \sol{
+        \begin{align*}
+            \vec{e} &= \vec{r} - A_{curr}\vec{x}_{curr} \\
+            &= \begin{bmatrix} -1.8 \\ 1.5 \\ 0.3\end{bmatrix}
+                - \begin{bmatrix} -0.5 \\ 0.5 \\ 0.1 \end{bmatrix}
+                \begin{bmatrix} 3.294 \end{bmatrix} \\
+            &\approx \begin{bmatrix} -0.152 \\ -0.147 \\ -0.029 \end{bmatrix}
+        \end{align*}
+    }
+    \item Find the next strongest unaccounted beacon.
+    \\ \\
+    \sol{
+        We cross-correlate with the remaining vectors as follows.
+        \begin{itemize}
+            \item $\texttt{circcorr}(\vec{e}, \vec{s}_2) = \begin{bmatrix} 0.088 \\ 0.092 \\ 0.018 \end{bmatrix}$
+            \item $\texttt{circcorr}(\vec{e}, \vec{s}_3) = \begin{bmatrix} -0.231 \\ -0.218 \\ -0.242 \end{bmatrix}$
+        \end{itemize}
+        Index 2 of the correlation with $\vec{s}_3$ has the largest value (keep in mind that correlation is zero-indexed).
+    }
+    \item Once more, estimate our new value of $\vec{x}_{curr}$.
+    \\ \\
+    \sol{
+    We do least squares again, this time with $A = \begin{bmatrix} \vline & \vline \\ \vec{s}_1^{(0)} & \vec{s}_3^{(2)} \\ \vline & \vline \end{bmatrix}$.
+        $$
+            \vec{x}_{curr} = (\begin{bmatrix} -0.5 & 0.5 & 0.1 \\ -0.6 & 0 & 0 \end{bmatrix}
+            \begin{bmatrix} -0.5 & -0.6 \\ 0.5 & 0 \\ 0.1 & 0 \end{bmatrix})^{-1}
+            \begin{bmatrix} -0.5 & 0.5 & 0.1 \\ -0.6 & 0 & 0 \end{bmatrix}
+            \begin{bmatrix} -1.8 \\ 1.5 \\ 0.3 \end{bmatrix}
+            = \begin{bmatrix} 3 \\ 0.5 \end{bmatrix}
+        $$
+    }
+    \\ \\
+    We can now terminate OMP, as we have performed 2 iterations of the algorithm, thereby finding $k=2$ signals.
+    \item Express $\vec{r}$ as a linear combination of $\vec{s}_1$, $\vec{s}_2$, and $\vec{s}_3$.
+    What is our final error vector $\vec{e}$?
+    \\ \\
+    \sol{
+        The result of OMP tells us that $\vec{r} = 3\vec{s}_1^{(0)} + 0.5\vec{s}_2^{(2)}$.
+        Our error vector $\vec{r} - A_{curr}\vec{x}_{curr}$ turns out to be exactly $\vec{0}$.
+        Note that if we had received some noise, i.e.
+        $$\vec{r} = 3\vec{s}_1^{(0)} + 0.5\vec{s}_2^{(2)} + \vec{c}$$
+        for some small $\vec{c}$, then we would instead have $\vec{e} = \vec{c}$.
+    }
+    \\ \\
+    \note{
+        If your students have some difficulty understanding this part, remind them of the fact that
+        a matrix-vector multiplication is a linear combination of the columns of the matrix, i.e.
+        $$
+            \begin{bmatrix} \vline & & \vline \\ \vec{a}_1 & \dots & \vec{a}_n \\ \vline & \vline \end{bmatrix}
+            \begin{bmatrix} x_1 \\ \vdots \\ x_n \end{bmatrix}
+            = x_1\vec{a}_1 + \dots x_n\vec{a}_n
+        $$
+    }
 \end{enumerate}
