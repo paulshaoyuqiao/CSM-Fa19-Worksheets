@@ -332,12 +332,12 @@ INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../ls.tex
 INPUT /usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../omp.tex
-INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../omp.tex
-INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
-INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsl10.tfm
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmbxsl10.tfm
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../omp.tex
+INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../omp.tex
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../gps.tex
 INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../gps.tex
 INPUT /Users/jhshi/Documents/csm-ee16a/latex/Worksheet 13/metas/../trilateration-1.png
