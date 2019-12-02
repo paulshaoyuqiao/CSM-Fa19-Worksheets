@@ -1,5 +1,5 @@
-[0] Config.pm:302> INFO - This is Biber 2.11
-[0] Config.pm:305> INFO - Logfile is 'meta.blg'
-[32] biber-darwin:313> INFO - === Sun Dec  1, 2019, 13:56:28
-[49] Biber.pm:371> INFO - Reading 'meta.bcf'
-[123] Utils.pm:193> WARN - No data sources defined!
+[0] Config.pm:354> INFO - This is Biber 2.7
+[0] Config.pm:357> INFO - Logfile is 'meta.blg'
+[36] biber-darwin:303> INFO - === Sun Dec  1, 2019, 18:58:27
+[55] Biber.pm:359> INFO - Reading 'meta.bcf'
+[130] Utils.pm:164> WARN - No data sources defined!

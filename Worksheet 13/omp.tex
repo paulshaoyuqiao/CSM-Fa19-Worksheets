@@ -1,0 +1,182 @@
+% Author: Rishi Veerapeneni, Jonathan Shi
+\\ \\
+\learning{
+    Understand the motivation for OMP and how the algorithm works.
+}
+
+OMP is an algorithm that solves an equation of the form $A\vec{x} = \vec{b}$.
+This make look familiar, as we have discussed other ways of solving this equation,
+like Gaussian elimination, inverse matrices, or least squares.
+In this question, we will explore when and why we would want to use OMP instead of
+these other techniques.
+\\ \\
+\note {
+    This first half of the problem focuses on the motivation of and assumptions made in the OMP algorithm.
+}
+
+\begin{enumerate}
+    \item In the equation $A\vec{x} = \vec{b}$, what are $A$, $\vec{x}$, and $\vec{b}$?
+    Specifically, what are their dimensions, and what do they mean in the context of
+    a real-world problem like GPS trilateration? 
+    \begin{itemize}
+        \item What does $A$ represent? What are its dimensions? What do $A_i$ and $A_{i,j}$ represent?
+        \answerbox{0.5cm}
+        \\ \\
+        \sol{
+            $A$ is an $n\times m$ matrix, where $m$ is the number of devices and $n$ is the signal
+            broadcasted by each device. Therefore, $A_i$ is the signal from the $i$th device, and
+            $A_{i,j}$ is the $j$th element of the signal.
+        }
+
+        \item What does $\vec{x}$ represent? What are its dimensions? What does $x_i$ represent?
+        \answerbox{0.5cm}
+        \\ \\
+        \sol{
+            $\vec{x}$ is an $m\times 1$ matrix, so we just say it is a vector of size $m$.
+            $x_i$ represents the scaling factor (and the strength) of the signal sent out by the $i$th device.
+        }
+
+        \item What does $\vec{b}$ represent? What are its dimensions?
+        \answerbox{0.5cm}
+        \\ \\
+        \sol{
+            $\vec{b}$ is an $n\times 1$ matrix, so we just say it is a vector of size $n$.
+            $\vec{b}$ represents the signal the signal received by the receiver.
+        }
+    \end{itemize}
+
+    \item To solve $A\vec{x}=\vec{b}$, what assumptions do we need to make in order to use each of the following techniques?
+    \\ \\
+    \note{
+        Try to explain how each of these assumptions would be violated in the context of the GPS problem.
+    }
+    \begin{itemize}
+        \item Gaussian elimination
+        \answerbox{1cm}
+        \\ \\
+        \sol{There must be no noise in our received signal $\vec{b}$.}
+        \item Inverse matrices
+        \answerbox{1cm}
+        \\ \\
+        \sol{
+            $A$ must be square and its columns must be linearly independent.
+            Note that GE can be used even when $A$ is not square.
+        }
+        \item Least squares
+        \answerbox{1cm}
+        \\ \\
+        \sol{
+            $A^TA$ must be invertible, which in turn means $A$ must have a non-trivial nullspace
+            (see \href{http://inst.eecs.berkeley.edu/~ee16a/fa19/lecture/Note23.pdf}{Note 23} for more details.)
+            This also means $A$ must have linearly independent columns.
+        }
+    \end{itemize}
+
+    \item What specific assumptions does the OMP algorithm make? \textit{
+        Hint: there's three main ones.
+    }
+    \answerbox{2cm}
+    \\ \\
+    \sol{
+        \begin{itemize}
+            \item There are many devices that could be broadcasting signals
+            \item The signals sent by each device are nearly orthogonal to each other
+            \item Only a few devices are actually sending out signals, i.e.
+                  there are few $i$ for which $x_i$ would be nonzero.
+        \end{itemize}
+    }
+    \item What do these assumptions imply about
+    \begin{itemize}
+        \item the dimensions of $A$, the matrix whose columns are all our possible beacons?
+        \answerbox{0.5cm}
+        \item the relationship between $a_i$ and $a_j$, two of our possible beacon signals?
+        \answerbox{0.5cm}
+        \item the scaling factors in $\vec{x}$?
+        \answerbox{0.5cm}
+    \end{itemize}
+    \sol{
+        \begin{itemize}
+            \item $A$ should be short and wide, as we have many possible signals
+            \item $<\vec{a_i}, \vec{a_j}> \approx 0$, as our signals are nearly orthogonal
+            \item most $x_i$ are 0, as $\vec{x}$ is sparse
+        \end{itemize}
+        Note that $A$ here is the $A$ in our original equation $A\vec{x}=\vec{b}$,
+        not the same as the $A$ constructed by the OMP algorithm. The $A$ constructed by OMP
+        simply omits all beacons that we believe to not be broadcasting, i.e. $\vec{a_i}$ for which $x_i$ is 0.
+    }
+
+    OMP comes with one more twist: previously, we received a linear combination of our beacons signals, where
+    $$ \vec{b} = x_1\vec{a_1} + \dots + x_m\vec{a_m} $$
+    where $\vec{b}$ is the received signal, and each $\vec{a_i}$ is a beacon signal.
+    \\ \\
+    In OMP, instead of just receiving a linear combination of beacons, we receive a linear
+    combination of \textit{shifted versions} of our beacon signals. In other words,
+    $$ \vec{b} = x_1\vec{a_1}^{(\tau_1)} + \dots + x_m\vec{a_m}^{(\tau_m)} $$
+    where signal $\vec{a_i}^{(\tau_i)}$ denotes $\vec{a_i}$ shifted forward in time by $\tau_i$.
+    \item How does receiving shifted versions of signals affect our assumptions?
+    \\ \\
+    \note{
+        It may help to draw on the board what it means to shift the signal \textit{forward} in time,
+        just to remind your students.
+    }
+    \answerbox{0.5cm}
+    \\ \\
+    \sol{
+        Instead of our signals being nearly orthogonal to each other, they must now be nearly orthogonal
+        to all shifts of themselves, i.e.
+        $$ <\vec{a_i}^{(\tau_i)}, \vec{a_j}^{(\tau_j)}> $$
+        where $i \neq j$ and $\tau_i \neq \tau_j$.
+    }
+    \\ \\
+    We now know what assumptions are necessary to apply OMP. Now let's talk about the algorithm!
+    OMP as a whole revolves around a simple strategy. We keep track of how much of the received signal is
+    still unaccounted for, find the strongest device within that signal, subtract out that component from
+    the unaccounted for signal, and repeat until we can't find more beacon signals.
+    At a high level, this is what the steps of the algorithm look like:
+    \\ \\
+    \note{
+        We now focus on the steps of the algorithm itself.
+    }
+    \begin{itemize}
+        \item We initialize $A_{curr}$ to be our matrix of beacons we know to be a part of the received signal $\vec{b}$,
+        and $\vec{x}_{curr}$ to be our guesses for the weights of these beacons within $\vec{b}$.
+        \item We assume there to be at most $k$ beacons that are broadcasting.
+        \item While the magnitude of the difference between our guess for $\vec{b}$ and the actual value of $\vec{b}$ is
+        above some threshhold AND we've not yet found $k$ beacons:
+        \begin{itemize}
+            \item Find the strongest beacon yet unaccounted for, and add it to $A_{curr}$.
+            \item Update your estimate for $\vec{x}_{curr}$.
+        \end{itemize}
+    \end{itemize}
+
+    \item How can we encode each of these steps in mathematical terms?
+    \begin{enumerate}
+        \item Let $\vec{e}$ be the difference between our guess of $\vec{b}$ and the actual value of $\vec{b}$.
+        How do we write an expression for $\vec{e}$.
+        \\ \\
+        \sol{
+            $\vec{e}$ represents the amount of the original signal that's yet unaccounted for by our guess.
+            Our guess is $A_{curr}\vec{x}_{curr}$, so our error vector is
+            $$\vec{e} = \vec{b} - A_{curr}\vec{x}_{curr}$$
+        }
+        \item Given $A_{curr}$ and $\vec{x}_{curr}$, how do we find the strongest remaining shifted signal $\vec{a_i}^{(\tau_i)}$?
+        \textit{Hint: How do we get an expression for how much of the signal is still unaccounted for by the vectors in $A$?}
+        \\ \\
+        \sol{
+            $\vec{e}$, found in the previous problem, actually describes how much of the signal is not yet accounted for.
+            To find the strongest beacon, we now just cross-correlate $\vec{e}$ with each $\vec{a}_i$. The correlation with
+            the largest value tells us which $\vec{a}_i$ it is, and the index within the correlation vector is the
+            amount this signal was shifted by.
+        }
+        \item Given guessed signals $A_{curr}$, received signal $\vec{b}$, the signal we just found $\vec{a}$, and old estimate
+        $\vec{x}_{curr, old}$, how do we get our new estimate for $\vec{x}_{curr, new}$?
+        \\ \\
+        \sol{
+            We use least squares to approximate $\vec{x}$.
+            $$ \vec{x}_{curr, new} = (A^TA)^{-1}A^T\vec{b} $$
+        }
+    \end{enumerate}
+    Let's walk through the algorithm with some example values now.
+    % TODO
+
+\end{enumerate}
