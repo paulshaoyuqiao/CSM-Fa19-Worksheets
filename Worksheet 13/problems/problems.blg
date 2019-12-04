@@ -1,5 +1,5 @@
-[0] Config.pm:302> INFO - This is Biber 2.11
-[0] Config.pm:305> INFO - Logfile is 'problems.blg'
-[31] biber-darwin:313> INFO - === Sun Dec  1, 2019, 14:00:23
-[48] Biber.pm:371> INFO - Reading 'problems.bcf'
-[121] Utils.pm:193> WARN - No data sources defined!
+[0] Config.pm:354> INFO - This is Biber 2.7
+[0] Config.pm:357> INFO - Logfile is 'problems.blg'
+[35] biber-darwin:303> INFO - === Wed Dec  4, 2019, 12:35:17
+[54] Biber.pm:359> INFO - Reading 'problems.bcf'
+[133] Utils.pm:164> WARN - No data sources defined!
