@@ -124,7 +124,7 @@ these other techniques.
     \sol{
         Instead of our signals being nearly orthogonal to each other, they must now be nearly orthogonal
         to all shifted versions of themselves, i.e.
-        $$ <\vec{s}_i^{(\tau_i)}, \vec{s}_j^{(\tau_j)}> $$
+        $$ <\vec{s}_i^{(\tau_i)}, \vec{s}_j^{(\tau_j)}> \approx 0 $$
         where $i \neq j$ and $\tau_i \neq \tau_j$.
     }
     \\ \\
@@ -138,10 +138,10 @@ these other techniques.
         We now focus on the steps of the algorithm itself.
     }
     \begin{itemize}
-        \item We initialize $A_{curr}$ to be our matrix of beacons we know to be a part of the received signal $\vec{b}$,
-        and $\vec{x}_{curr}$ to be our guesses for the weights of these beacons within $\vec{b}$.
+        \item We initialize $A_{curr}$ to be our matrix of beacons we know to be a part of the received signal $\vec{r}$,
+        and $\vec{x}_{curr}$ to be our guesses for the weights of these beacons within $\vec{r}$.
         \item We assume there to be at most $k$ beacons that are broadcasting.
-        \item While the magnitude of the difference between our guess for $\vec{b}$ and the actual value of $\vec{b}$ is
+        \item While the magnitude of the difference between our guess for $\vec{r}$ and the actual value of $\vec{r}$ is
         above some threshhold AND we've not yet found $k$ beacons:
         \begin{itemize}
             \item Find the strongest beacon yet unaccounted for, and add it to $A_{curr}$.
@@ -151,13 +151,13 @@ these other techniques.
 
     \item How can we encode each of these steps in mathematical terms?
     \begin{enumerate}
-        \item Let $\vec{e}$ be the difference between our guess of $\vec{b}$ and the actual value of $\vec{b}$.
+        \item Let $\vec{e}$ be the difference between our guess of $\vec{r}$ and the actual value of $\vec{r}$.
         How do we write an expression for $\vec{e}$.
         \\ \\
         \sol{
             $\vec{e}$ represents the amount of the original signal that's yet unaccounted for by our guess.
             Our guess is $A_{curr}\vec{x}_{curr}$, so our error vector is
-            $$\vec{e} = \vec{b} - A_{curr}\vec{x}_{curr}$$
+            $$\vec{e} = \vec{r} - A_{curr}\vec{x}_{curr}$$
         }
         \item Given $A_{curr}$ and $\vec{x}_{curr}$, how do we find the strongest remaining shifted signal $\vec{s}_i^{(\tau_i)}$?
         \textit{Hint: How do we get an expression for how much of the signal is still unaccounted for by the vectors in $A$?}
@@ -168,12 +168,12 @@ these other techniques.
             the largest value tells us which $\vec{s}_i$ it is, and the index within the correlation vector is the
             amount this signal was shifted by.
         }
-        \item Given guessed signals $A_{curr}$, received signal $\vec{b}$, the signal we just found $\vec{a}$, and old estimate
+        \item Given guessed signals $A_{curr}$, received signal $\vec{r}$, the signal we just found $\vec{a}$, and old estimate
         $\vec{x}_{curr, old}$, how do we get our new estimate for $\vec{x}_{curr, new}$?
         \\ \\
         \sol{
             We use least squares to approximate $\vec{x}$.
-            $$ \vec{x}_{curr, new} = (A^TA)^{-1}A^T\vec{b} $$
+            $$ \vec{x}_{curr, new} = (A^TA)^{-1}A^T\vec{r} $$
         }
     \end{enumerate}
     Let's walk through the algorithm with some example values now.
@@ -255,7 +255,7 @@ these other techniques.
     }
     \\ \\
     We can now terminate OMP, as we have performed 2 iterations of the algorithm, thereby finding $k=2$ signals.
-    \item Express $\vec{r}$ as a linear combination of $\vec{s}_1$, $\vec{s}_2$, and $\vec{s}_3$.
+    \item Express $\vec{r}$ as a linear combination of shifted versions of $\vec{s}_1$, $\vec{s}_2$, and $\vec{s}_3$.
     What is our final error vector $\vec{e}$?
     \\ \\
     \sol{
