@@ -19,13 +19,12 @@ these other techniques.
     Specifically, what are their dimensions, and what do they mean in the context of
     a real-world problem like GPS trilateration? 
     \begin{itemize}
-        \item What does $A$ represent? What are its dimensions? What do $A_i$ and $A_{i,j}$ represent?
+        \item What does $A$ represent? What are its dimensions? What does the $i$th column of $A$ represent?
         \answerbox{0.5cm}
         \\ \\
         \sol{
             $A$ is an $n\times m$ matrix, where $m$ is the number of devices and $n$ is the signal
-            broadcasted by each device. Therefore, $A_i$ is the signal from the $i$th device, and
-            $A_{i,j}$ is the $j$th element of the signal.
+            broadcasted by each device. Therefore, the $i$th column of $A$ is the signal from the $i$th device.
         }
 
         \item What does $\vec{x}$ represent? What are its dimensions? What does $x_i$ represent?
@@ -41,7 +40,7 @@ these other techniques.
         \\ \\
         \sol{
             $\vec{b}$ is an $n\times 1$ matrix, so we just say it is a vector of size $n$.
-            $\vec{b}$ represents the signal the signal received by the receiver.
+            $\vec{b}$ represents the signal received by the receiver.
         }
     \end{itemize}
 
@@ -66,7 +65,7 @@ these other techniques.
         \answerbox{1cm}
         \\ \\
         \sol{
-            $A^TA$ must be invertible, which in turn means $A$ must have a non-trivial nullspace
+            $A^TA$ must be invertible, which in turn means $A$ must have a trivial nullspace
             (see \href{http://inst.eecs.berkeley.edu/~ee16a/fa19/lecture/Note23.pdf}{Note 23} for more details.)
             This also means $A$ must have linearly independent columns.
         }
@@ -197,13 +196,19 @@ these other techniques.
     \\ \\
     \sol{
         Per the previous part, we initialize $\vec{e}=\vec{r}$.
-        We cross-correlate $\vec{e}$ with each $\vec{s}_i$:
+        We examine the dot products of $\vec{e}$ with all shifted versions of our signal vectors.
         \begin{itemize}
-            \item $\texttt{circcorr}(\vec{e}, \vec{s}_1) = \begin{bmatrix} 1.68 \\ -0.9 \\ -0.78 \end{bmatrix}$
-            \item $\texttt{circcorr}(\vec{e}, \vec{s}_2) = \begin{bmatrix} -0.33 \\  0.21 \\ 0.12 \end{bmatrix}$
-            \item $\texttt{circcorr}(\vec{e}, \vec{s}_3) = \begin{bmatrix} -0.9 \\ 1.08 \\ -0.18 \end{bmatrix}$
+            \item $<\vec{e}, \vec{s}_1^{(0)}>$ = 1.68
+            \item $<\vec{e}, \vec{s}_1^{(1)}>$ = -0.9
+            \item $<\vec{e}, \vec{s}_1^{(2)}>$ = -0.78
+            \item $<\vec{e}, \vec{s}_2^{(0)}>$ = -0.33
+            \item $<\vec{e}, \vec{s}_2^{(1)}>$ = 0.21
+            \item $<\vec{e}, \vec{s}_2^{(2)}>$ = 0.12
+            \item $<\vec{e}, \vec{s}_3^{(0)}>$ = -0.9
+            \item $<\vec{e}, \vec{s}_3^{(1)}>$ = 1.08
+            \item $<\vec{e}, \vec{s}_3^{(2)}>$ = -0.18
         \end{itemize}
-        The largest magnitude is in the correlation with $\vec{s}_1$ at index 0.
+        The largest magnitude is in the inner product between $\vec{e}$ and $\vec{s}_1^{(0)}$.
         This tells us that we $\vec{s}_1^{(0)}$ is the strongest beacon.
     }
     \item Estimate our new value of $\vec{x}_{curr}$.
@@ -236,21 +241,30 @@ these other techniques.
     \sol{
         We cross-correlate with the remaining vectors as follows.
         \begin{itemize}
-            \item $\texttt{circcorr}(\vec{e}, \vec{s}_2) = \begin{bmatrix} 0.088 \\ 0.092 \\ 0.018 \end{bmatrix}$
-            \item $\texttt{circcorr}(\vec{e}, \vec{s}_3) = \begin{bmatrix} -0.231 \\ -0.218 \\ -0.242 \end{bmatrix}$
+            \item $<\vec{e}, \vec{s}_2^{(0)}>$ = -0.231
+            \item $<\vec{e}, \vec{s}_2^{(1)}>$ = -0.218
+            \item $<\vec{e}, \vec{s}_2^{(2)}>$ = -0.242
+            \item $<\vec{e}, \vec{s}_3^{(0)}>$ = 0.088
+            \item $<\vec{e}, \vec{s}_3^{(1)}>$ = 0.092
+            \item $<\vec{e}, \vec{s}_3^{(2)}>$ = 0.018
         \end{itemize}
-        Index 2 of the correlation with $\vec{s}_3$ has the largest value (keep in mind that correlation is zero-indexed).
+        The inner product of $\vec{e}$ with $\vec{s}_2^{(2)}$ has the largest magnitude.
+    }
+    \\ \\
+    \note{
+        We take the inner product with the largest \textit{magnitude} rather than the largest value to
+        account for the possibility of negative scaling.
     }
     \item Once more, estimate our new value of $\vec{x}_{curr}$.
     \\ \\
     \sol{
     We do least squares again, this time with $A = \begin{bmatrix} \vline & \vline \\ \vec{s}_1^{(0)} & \vec{s}_3^{(2)} \\ \vline & \vline \end{bmatrix}$.
         $$
-            \vec{x}_{curr} = (\begin{bmatrix} -0.5 & 0.5 & 0.1 \\ -0.6 & 0 & 0 \end{bmatrix}
-            \begin{bmatrix} -0.5 & -0.6 \\ 0.5 & 0 \\ 0.1 & 0 \end{bmatrix})^{-1}
-            \begin{bmatrix} -0.5 & 0.5 & 0.1 \\ -0.6 & 0 & 0 \end{bmatrix}
+            \vec{x}_{curr} = (\begin{bmatrix} -0.5 & 0.5 & 0.1 \\ 0.7 & 0.8 & 0.6 \end{bmatrix}
+            \begin{bmatrix} -0.5 & 0.7 \\ 0.5 & 0.8 \\ 0.1 & 0.6 \end{bmatrix})^{-1}
+            \begin{bmatrix} -0.5 & 0.5 & 0.1 \\ 0.7 & 0.8 & 0.6 \end{bmatrix}
             \begin{bmatrix} -1.8 \\ 1.5 \\ 0.3 \end{bmatrix}
-            = \begin{bmatrix} 3 \\ 0.5 \end{bmatrix}
+            = \begin{bmatrix} 3.178 \\ 0.102 \end{bmatrix}
         $$
     }
     \\ \\
@@ -259,11 +273,9 @@ these other techniques.
     What is our final error vector $\vec{e}$?
     \\ \\
     \sol{
-        The result of OMP tells us that $\vec{r} = 3\vec{s}_1^{(0)} + 0.5\vec{s}_2^{(2)}$.
-        Our error vector $\vec{r} - A_{curr}\vec{x}_{curr}$ turns out to be exactly $\vec{0}$.
-        Note that if we had received some noise, i.e.
-        $$\vec{r} = 3\vec{s}_1^{(0)} + 0.5\vec{s}_2^{(2)} + \vec{c}$$
-        for some small $\vec{c}$, then we would instead have $\vec{e} = \vec{c}$.
+        The result of OMP tells us that $\vec{r} = 3.178\vec{s}_1^{(0)} + 0.102\vec{s}_2^{(2)}$.
+        Our error vector $\vec{r} - A_{curr}\vec{x}_{curr}$ turns out to be
+        $\begin{bmatrix}-0.282 \\ -0.170 \\ 0.556\end{bmatrix}$.
     }
     \\ \\
     \note{
